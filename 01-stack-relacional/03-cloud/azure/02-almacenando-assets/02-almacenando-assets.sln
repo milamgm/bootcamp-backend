@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tour-of-heroes-api", "back-end\tour-of-heroes-api.csproj", "{391F609B-0F8F-C78E-903F-750BDC47AF95}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{391F609B-0F8F-C78E-903F-750BDC47AF95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{391F609B-0F8F-C78E-903F-750BDC47AF95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{391F609B-0F8F-C78E-903F-750BDC47AF95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{391F609B-0F8F-C78E-903F-750BDC47AF95}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {64DD6EA6-EEA3-47D1-8BA7-E82DA3A06DA4}
+	EndGlobalSection
+EndGlobal

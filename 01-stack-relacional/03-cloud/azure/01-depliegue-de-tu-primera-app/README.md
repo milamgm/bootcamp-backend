@@ -222,10 +222,10 @@ Para crear un App Service Static Web Apps ejecuta el siguiente comando:
 az staticwebapp create \
 --name $FRONT_END_NAME \
 --resource-group $RESOURCE_GROUP \
---source https://github.com/$GITHUB_USER_NAME/tour-of-heroes-angular \
+--source https://github.com/$GITHUB_USER_NAME/bootcamp-backend \
 --location "westeurope" \
 --branch main \
---app-location "/01-stack-relacional/03-cloud/azure/01-depliegue-de-tu-primera-app/front-end" \
+--app-location "01-stack-relacional/03-cloud/azure/01-depliegue-de-tu-primera-app/front-end" \
 --output-location "dist/angular-tour-of-heroes" \
 --login-with-github
 ```
