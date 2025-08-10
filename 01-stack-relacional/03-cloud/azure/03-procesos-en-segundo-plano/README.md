@@ -24,8 +24,8 @@ Para los heroes:
 ```bash
 az storage blob upload-batch \
 --destination heroes \
---source assets/heroes/. \
---connection-string "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;TableEndpoint=http://127.0.0.1:10002/devstoreaccount1;"
+--source ../front-end/src/assets/heroes/. \
+--connection-string "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;TableEndpoint=http://127.0.0.1:10002/devstoreaccount1;"
 ```
 
 Para los alter egos:
@@ -33,7 +33,7 @@ Para los alter egos:
 ```bash
 az storage blob upload-batch \
 --destination alteregos \
---source assets/alteregos/png/. \
+--source ../front-end/src/assets/alteregos/. \
 --connection-string "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;TableEndpoint=http://127.0.0.1:10002/devstoreaccount1;"
 ```
 
@@ -162,6 +162,8 @@ Una vez instalado, vamos a crear un nuevo proyecto de Azure Functions. Para ello
 mkdir -p 01-stack-relacional/03-cloud/azure/03-procesos-en-segundo-plano/azure-functions
 cd 01-stack-relacional/03-cloud/azure/03-procesos-en-segundo-plano/azure-functions
 func init
+
+
 ```
 El último comando iniciará un asistente donde tenemos que elegir el lenguaje de programación con el que queremos desarrollar esta Azure Function. Para este ejemplo elegiremos `1.dotnet` y en el segundo paso el lenguaje será `1.c#`. Una vez finalice la creación la misma estará disponible en la carpeta `01-stack-relacional/03-cloud/azure/03-procesos-en-segundo-plano/azure-functions`.
 

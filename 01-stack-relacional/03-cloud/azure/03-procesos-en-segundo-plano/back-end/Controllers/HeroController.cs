@@ -9,7 +9,7 @@ namespace tour_of_heroes_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HeroController(IHeroRepository heroRepository,IConfiguration configuration) : ControllerBase
+    public class HeroController(IHeroRepository heroRepository, IConfiguration configuration) : ControllerBase
     {
         private readonly IHeroRepository _heroRepository = heroRepository;
         private readonly IConfiguration _configuration = configuration;
@@ -58,7 +58,7 @@ namespace tour_of_heroes_api.Controllers
         //     return NoContent();
 
         // }
-              // PUT: api/Hero/5
+        // PUT: api/Hero/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHero(int id, Hero hero)
@@ -102,8 +102,8 @@ namespace tour_of_heroes_api.Controllers
             catch (Exception ex)
             {
 
-                return NotFound(ex.Message);              
-                
+                return NotFound(ex.Message);
+
             }
 
             return NoContent();
@@ -123,12 +123,41 @@ namespace tour_of_heroes_api.Controllers
 
         // DELETE: api/Hero/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteHero(int id)
+        public async Task<IActionResult> DeleteHero(int id)
         {
-            _heroRepository.Delete(id);
+            var heroToDelete = _heroRepository.GetById(id);
+
+            if (heroToDelete == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                _heroRepository.Delete(id);
+
+                string connectionString = _configuration.GetConnectionString("AzureStorage");
+                var queueClient = new QueueClient(connectionString, "pics-to-delete");
+
+                await queueClient.CreateIfNotExistsAsync();
+
+                var message = new
+                {
+                    heroId = id,
+                    heroName = heroToDelete.Name,
+                    heroAlterEgo = heroToDelete.AlterEgo
+                };
+
+                await queueClient.SendMessageAsync(JsonSerializer.Serialize(message).ToString());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al eliminar el héroe: {ex.Message}");
+            }
 
             return NoContent();
         }
+
 
         // GET: api/hero/alteregopic/5
         [HttpGet("alteregopic/{id}")]
@@ -143,7 +172,7 @@ namespace tour_of_heroes_api.Controllers
 
             //Get image from Azure Storage
             string connectionString = _configuration.GetConnectionString("AzureStorage");
-            
+
             // Create a BlobServiceClient object which will be used to create a container client
             var blobServiceClient = new BlobServiceClient(connectionString);
 
@@ -192,6 +221,6 @@ namespace tour_of_heroes_api.Controllers
 
             //return image
             return Ok($"{blobServiceClient.Uri}{sasUri.Query}");
-        }    
+        }
     }
 }
